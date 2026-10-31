@@ -6,66 +6,30 @@ const homeUrl = base || '/';
 ---
 
 <header class="site-header">
-  <!-- 1986 Pontiac Digital Tachometer Top Bar -->
-  <div class="tach-bar">
-    <div class="container tach-inner">
-      <div class="tach-readout">
-        <span class="tach-label">IGNITION //</span>
-        <span class="tach-status">LS-V8 SWAP ONLINE</span>
+  <div class="container nav-inner">
+    <a href={homeUrl} class="brand" aria-label="High Octane Dads Home">
+      <div class="logo-wrap">
+        <img src={`${base}/images/HOD-Logo-2024.png`} alt="High Octane Dads" width="44" height="44" />
       </div>
-      <div class="tach-segments" aria-hidden="true">
-        <span class="seg green"></span>
-        <span class="seg green"></span>
-        <span class="seg green"></span>
-        <span class="seg green"></span>
-        <span class="seg green"></span>
-        <span class="seg amber"></span>
-        <span class="seg amber"></span>
-        <span class="seg amber"></span>
-        <span class="seg red"></span>
-        <span class="seg red"></span>
-        <span class="tach-rpm">6,800 RPM</span>
-      </div>
-      <div class="cel-indicator" title="High Octane Dads Check Engine Light: Always Lit!">
-        <img
-          src={`${base}/images/high-octane-dads-podcast-check-engine-logo.png`}
-          alt="High Octane Dads Check Engine Light"
-          width="32"
-          height="32"
-        />
-        <span>CHECK ENGINE: SEND IT</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="container nav-container">
-    <a href={homeUrl} class="brand-logo" aria-label="High Octane Dads Home">
-      <div class="logo-badge">
-        <img src={`${base}/images/HOD-Logo-2024.png`} alt="High Octane Dads Podcast Logo" width="68" height="68" />
-      </div>
-      <div class="brand-text">
-        <span class="brand-title">HIGH <em>OCTANE</em> DADS</span>
-        <span class="brand-sub">PODCAST // EST. {SITE_CONFIG.established}</span>
-      </div>
+      <span class="brand-name">High Octane Dads</span>
     </a>
 
-    <nav class="main-nav" aria-label="Primary Navigation">
-      <a href={`${base}/#latest-episode`} class="nav-link">Listen Now</a>
-      <a href={`${base}/#meet-the-dads`} class="nav-link">The Dads</a>
-      <a href={`${base}/#trans-am-twins`} class="nav-link">’86 Trans Ams</a>
-      <a href={`${base}/episodes`} class="nav-link">All Episodes</a>
-      <a href={`${base}/#pit-radio`} class="nav-link">Contact</a>
+    <nav class="nav-links" aria-label="Primary Navigation">
+      <a href={`${base}/#episodes`}>Episodes</a>
+      <a href={`${base}/#about`}>About Us</a>
+      <a href={`${base}/#garage`}>The ’86 Trans Ams</a>
+      <a href={`${base}/#contact`}>Contact</a>
     </nav>
 
-    <div class="nav-actions">
+    <div class="nav-cta">
       <a
         href={SITE_CONFIG.links.merch}
         target="_blank"
         rel="noopener noreferrer"
-        class="merch-btn"
+        class="shop-btn"
       >
-        <span>SHOP MERCH</span>
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+        <span>Merch Shop</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
       </a>
     </div>
   </div>
@@ -76,247 +40,82 @@ const homeUrl = base || '/';
     position: sticky;
     top: 0;
     z-index: 50;
-    background: rgba(10, 11, 14, 0.92);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border-steel);
+    background: rgba(9, 10, 13, 0.82);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border-subtle);
   }
 
-  .tach-bar {
-    background: #060709;
-    border-bottom: 1px solid rgba(255, 107, 0, 0.25);
-    padding: 0.35rem 0;
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-  }
-
-  .tach-inner {
+  .nav-inner {
+    height: 76px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 1rem;
+    gap: 1.5rem;
   }
 
-  .tach-readout {
+  .brand {
     display: flex;
     align-items: center;
-    gap: 0.45rem;
+    gap: 0.75rem;
   }
 
-  .tach-label {
-    color: var(--text-muted);
-  }
-
-  .tach-status {
-    color: #22c55e;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-  }
-
-  .tach-segments {
-    display: flex;
-    align-items: center;
-    gap: 3px;
-  }
-
-  .seg {
-    width: 12px;
-    height: 8px;
-    transform: skewX(-20deg);
-    display: inline-block;
-  }
-
-  .seg.green {
-    background: #22c55e;
-    box-shadow: 0 0 6px rgba(34, 197, 94, 0.5);
-  }
-
-  .seg.amber {
-    background: var(--amber-cel);
-    box-shadow: 0 0 6px rgba(234, 179, 8, 0.5);
-  }
-
-  .seg.red {
-    background: var(--red-octane);
-    box-shadow: 0 0 8px var(--red-glow);
-    animation: revPulse 1.1s infinite alternate;
-  }
-
-  .tach-rpm {
-    margin-left: 0.5rem;
-    color: var(--amber-dash);
-    font-weight: 700;
-  }
-
-  .cel-indicator {
-    display: flex;
-    align-items: center;
-    gap: 0.45rem;
-    color: var(--amber-cel);
-    font-weight: 700;
-    letter-spacing: 0.08em;
-  }
-
-  .cel-indicator img {
-    width: 24px;
-    height: 24px;
-    object-fit: contain;
-    filter: drop-shadow(0 0 6px rgba(234, 179, 8, 0.65));
-    animation: celBlink 3s infinite ease-in-out;
-  }
-
-  @keyframes revPulse {
-    from { opacity: 0.65; }
-    to { opacity: 1; }
-  }
-
-  @keyframes celBlink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.55; }
-  }
-
-  .nav-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-top: 0.75rem;
-    padding-bottom: 0.75rem;
-    gap: 1rem;
-  }
-
-  .brand-logo {
-    display: flex;
-    align-items: center;
-    gap: 0.85rem;
-  }
-
-  .logo-badge {
-    width: 54px;
-    height: 54px;
+  .logo-wrap {
+    width: 42px;
+    height: 42px;
     border-radius: 10px;
-    background: radial-gradient(circle, #ffffff 0%, #e2e8f0 100%);
+    background: #ffffff;
     padding: 3px;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 0 18px rgba(240, 30, 35, 0.35);
-    border: 2px solid var(--red-octane);
-    transition: transform 0.2s ease;
   }
 
-  .brand-logo:hover .logo-badge {
-    transform: scale(1.06) rotate(-3deg);
-  }
-
-  .brand-text {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .brand-title {
+  .brand-name {
     font-family: var(--font-heading);
     font-weight: 700;
-    font-style: italic;
-    font-size: 1.35rem;
-    letter-spacing: 0.04em;
-    line-height: 1;
+    font-size: 1.15rem;
+    letter-spacing: -0.01em;
   }
 
-  .brand-title em {
-    color: var(--red-octane);
-    font-style: italic;
-  }
-
-  .brand-sub {
-    font-family: var(--font-mono);
-    font-size: 0.68rem;
-    color: var(--transam-gold);
-    letter-spacing: 0.14em;
-    margin-top: 0.2rem;
-  }
-
-  .main-nav {
+  .nav-links {
     display: flex;
     align-items: center;
-    gap: 1.75rem;
+    gap: 2.25rem;
   }
 
-  .nav-link {
-    font-family: var(--font-heading);
-    font-weight: 600;
-    text-transform: uppercase;
-    font-size: 0.95rem;
-    letter-spacing: 0.06em;
+  .nav-links a {
+    font-size: 0.92rem;
+    font-weight: 500;
     color: var(--text-secondary);
     transition: color 0.2s ease;
-    position: relative;
   }
 
-  .nav-link:hover {
+  .nav-links a:hover {
     color: var(--text-primary);
   }
 
-  .nav-link::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: -4px;
-    width: 0;
-    height: 2px;
-    background: var(--red-octane);
-    transition: width 0.2s ease;
-  }
-
-  .nav-link:hover::after {
-    width: 100%;
-  }
-
-  .merch-btn {
+  .shop-btn {
     display: inline-flex;
     align-items: center;
     gap: 0.45rem;
-    font-family: var(--font-heading);
-    font-weight: 700;
-    font-style: italic;
-    font-size: 0.9rem;
-    letter-spacing: 0.08em;
-    padding: 0.6rem 1.15rem;
-    background: var(--red-octane);
-    color: #fff;
-    border-radius: 4px;
-    transform: skewX(-10deg);
-    box-shadow: 0 4px 18px var(--red-glow);
-    transition: all 0.2s ease;
+    padding: 0.55rem 1.1rem;
+    border-radius: 999px;
+    background: var(--text-primary);
+    color: #090a0d;
+    font-size: 0.88rem;
+    font-weight: 600;
+    transition: transform 0.2s ease, background-color 0.2s ease;
   }
 
-  .merch-btn span,
-  .merch-btn svg {
-    transform: skewX(10deg);
+  .shop-btn:hover {
+    background: #e2e8f0;
+    transform: translateY(-1px);
   }
 
-  .merch-btn:hover {
-    background: #ff2a30;
-    transform: skewX(-10deg) translateY(-2px);
-    box-shadow: 0 6px 24px rgba(240, 30, 35, 0.65);
-  }
-
-  @media (max-width: 900px) {
-    .tach-segments {
+  @media (max-width: 768px) {
+    .nav-links {
       display: none;
-    }
-    .main-nav {
-      display: none;
-    }
-  }
-
-  @media (max-width: 560px) {
-    .tach-readout {
-      display: none;
-    }
-    .tach-inner {
-      justify-content: center;
-    }
-    .brand-title {
-      font-size: 1.1rem;
     }
   }
 </style>

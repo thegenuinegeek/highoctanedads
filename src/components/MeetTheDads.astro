@@ -4,117 +4,62 @@ import { SITE_CONFIG } from '../config';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
-<section id="meet-the-dads" class="dads-section">
+<section id="about" class="about-section">
   <div class="container">
-    <div class="section-header">
-      <div class="dash-tag">GARAGE ROSTER // CO-HOSTS</div>
-      <h2 class="section-title">MEET THE <span>HIGH OCTANE DADS</span></h2>
-      <p class="section-sub">
-        Two dads, too many project cars, and an unhealthy love for 80s GM sheetmetal.
+    <div class="section-intro">
+      <span class="eyebrow">The Hosts</span>
+      <h2 class="section-heading">Meet James &amp; Chris</h2>
+      <p class="section-lead">
+        A couple of dads who love all things fast and loud—bringing you real garage conversations every Saturday.
       </p>
     </div>
 
-    <!-- Dads Spec-Sheet Cards -->
+    <!-- Clean 2-Column Host Profiles -->
     <div class="hosts-grid">
-      {SITE_CONFIG.hosts.map((host, index) => (
-        <article class={`host-card accent-${host.accent}`}>
-          <div class="host-card-top">
-            <span class="bay-number">GARAGE BAY 0{index + 1}</span>
-            <span class="host-handle">{host.handle}</span>
-          </div>
-
-          <div class="host-main">
+      {SITE_CONFIG.hosts.map((host) => (
+        <article class="host-card">
+          <div class="host-top">
+            <span class="host-role">{host.handle}</span>
             <h3 class="host-name">{host.name}</h3>
-            <p class="host-bio">{host.bio}</p>
-
-            <div class="spec-table">
-              <div class="spec-header">DRIVER TELEMETRY &amp; SPECS</div>
-              {host.specs.map((spec) => (
-                <div class="spec-row">
-                  <span class="spec-key">{spec.label}</span>
-                  <span class="spec-val">{spec.value}</span>
-                </div>
-              ))}
-            </div>
+          </div>
+          <p class="host-bio">{host.bio}</p>
+          <div class="host-tags">
+            {host.specs.map((spec) => (
+              <div class="tag-item">
+                <span class="tag-label">{spec.label}</span>
+                <span class="tag-value">{spec.value}</span>
+              </div>
+            ))}
           </div>
         </article>
       ))}
     </div>
 
-    <!-- The Mullet Militia & Twin 1986 Trans Am Origin Story -->
-    <div id="trans-am-twins" class="origin-showcase">
-      <div class="origin-top-strip">
-        <span>ORIGIN STORY // MULLET MILITIA &amp; THIRD-GEN F-BODIES</span>
-        <span>PONTIAC FIREBIRD TRANS AM // 1986 → LSX</span>
+    <!-- Clean Origin Story Card: Mullet Militia & Twin 1986 Trans Ams -->
+    <div id="garage" class="origin-card">
+      <div class="origin-text">
+        <span class="eyebrow">Our Origin Story</span>
+        <h3 class="origin-title">Mullet Militia &amp; Twin LS-Swapped 1986 Trans Ams</h3>
+        <p>
+          We met through <strong>Mullet Militia</strong> over a shared love of third-gen F-bodies. As it turned out, we both had a <strong>1986 Pontiac Trans Am</strong> as our very first car.
+        </p>
+        <p>
+          Even better: <strong>we both still have them today</strong>—and both of our ’86 Trans Ams are now <strong>LS-powered</strong>.
+        </p>
       </div>
 
-      <div class="origin-content">
-        <div class="origin-story">
-          <div class="dash-tag">T-TOPS &amp; SCREAMING CHICKENS</div>
-          <h3 class="origin-heading">
-            FIRST CARS FOR LIFE: <span class="gold-text">TWIN LS-SWAPPED ’86 TRANS AMS</span>
-          </h3>
-          <p>
-            Most people sell their first car and spend the rest of their lives wishing they hadn’t. Not us. We met through <strong>Mullet Militia</strong> over a shared obsession with third-generation F-bodies—and quickly realized we had the exact same automotive origin story.
-          </p>
-          <p>
-            Both of us had a <strong>1986 Pontiac Trans Am</strong> as our very first car. Better yet? <strong>We both still own them today</strong>, and neither one is stuck with factory 80s smog-era horsepower anymore—both have been breathing fire with <strong>modern LS V8 swaps</strong>.
-          </p>
-
-          <div class="twin-badges">
-            <div class="twin-pill">
-              <span class="pill-year">1986</span>
-              <span class="pill-desc">JAMES’S FIRST CAR // LS-SWAPPED TRANS AM</span>
-            </div>
-            <div class="twin-pill">
-              <span class="pill-year">1986</span>
-              <span class="pill-desc">CHRIS’S FIRST CAR // LS-SWAPPED TRANS AM</span>
-            </div>
-          </div>
+      <div class="origin-stats">
+        <div class="stat-box">
+          <span class="stat-num">1986</span>
+          <span class="stat-label">First Car for Both Hosts</span>
         </div>
-
-        <!-- 80s Pontiac Digital Cluster Graphic Card -->
-        <div class="transam-cluster-panel">
-          <div class="cluster-screen">
-            <div class="cluster-header">
-              <span>PONTIAC ELECTRONIC INSTRUMENT CLUSTER</span>
-              <span class="cluster-year">1986 // THIRD-GEN</span>
-            </div>
-
-            <!-- Custom SVG 80s Third-Gen Silhouette & Digital Gauges -->
-            <div class="cluster-gauges">
-              <div class="gauge-box">
-                <span class="gauge-label">ENGINE CODE</span>
-                <span class="gauge-value">LS V8 SWAP</span>
-                <span class="gauge-sub">BYE-BYE 305 TPI</span>
-              </div>
-              <div class="gauge-box">
-                <span class="gauge-label">CHASSIS</span>
-                <span class="gauge-value">1986 F-BODY</span>
-                <span class="gauge-sub">PONTIAC TRANS AM</span>
-              </div>
-              <div class="gauge-box">
-                <span class="gauge-label">CREW ORIGIN</span>
-                <span class="gauge-value">MULLET MILITIA</span>
-                <span class="gauge-sub">THIRDGEN BROTHERHOOD</span>
-              </div>
-              <div class="gauge-box">
-                <span class="gauge-label">OWNERSHIP</span>
-                <span class="gauge-value">FIRST CAR</span>
-                <span class="gauge-sub">NEVER SOLD // STILL DRIVEN</span>
-              </div>
-            </div>
-
-            <div class="cluster-footer">
-              <img
-                src={`${base}/images/high-octane-dads-podcast-check-engine-logo.png`}
-                alt="Check Engine Logo"
-                width="36"
-                height="36"
-              />
-              <span>DIAGNOSTIC CODE: 100% PURE AMERICAN MUSCLE &amp; DAD JOKES</span>
-            </div>
-          </div>
+        <div class="stat-box">
+          <span class="stat-num">LS V8</span>
+          <span class="stat-label">Modern Heart Swapped</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-num">F-Body</span>
+          <span class="stat-label">Mullet Militia Roots</span>
         </div>
       </div>
     </div>
@@ -122,299 +67,166 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 </section>
 
 <style>
-  .dads-section {
-    padding: 5rem 0;
+  .about-section {
+    padding: 5.5rem 0;
+    border-top: 1px solid var(--border-subtle);
   }
 
-  .section-header {
-    text-align: center;
-    max-width: 680px;
-    margin: 0 auto 3.5rem;
+  .section-intro {
+    max-width: 620px;
+    margin-bottom: 3rem;
   }
 
-  .section-sub {
+  .section-lead {
     color: var(--text-secondary);
-    margin-top: 0.75rem;
-    font-size: 1.05rem;
+    font-size: 1.08rem;
+    margin-top: 0.65rem;
   }
 
   .hosts-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
-    margin-bottom: 4rem;
+    margin-bottom: 2.5rem;
   }
 
   .host-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border-steel);
-    border-radius: 10px;
-    overflow: hidden;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: 20px;
+    padding: 2.25rem;
     display: flex;
     flex-direction: column;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    transition: border-color 0.2s ease;
   }
 
   .host-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.55);
+    border-color: var(--border-hover);
   }
 
-  .host-card.accent-amber {
-    border-top: 4px solid var(--amber-dash);
-  }
-
-  .host-card.accent-red {
-    border-top: 4px solid var(--red-octane);
-  }
-
-  .host-card-top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.75rem 1.5rem;
-    background: rgba(0, 0, 0, 0.35);
-    border-bottom: 1px solid var(--border-steel);
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-  }
-
-  .bay-number {
-    color: var(--text-muted);
+  .host-role {
+    display: inline-block;
+    font-size: 0.75rem;
     font-weight: 700;
-  }
-
-  .host-handle {
-    color: var(--transam-gold);
-    font-weight: 700;
-    letter-spacing: 0.08em;
-  }
-
-  .host-main {
-    padding: 1.75rem 1.5rem;
-    display: flex;
-    flex-direction: column;
-    flex: 1;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent-amber);
+    margin-bottom: 0.35rem;
   }
 
   .host-name {
-    font-family: var(--font-display);
-    font-size: 1.85rem;
-    text-transform: uppercase;
-    letter-spacing: 0.03em;
-    margin-bottom: 0.75rem;
+    font-family: var(--font-heading);
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
   }
 
   .host-bio {
     color: var(--text-secondary);
     font-size: 0.98rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.75rem;
     flex: 1;
   }
 
-  .spec-table {
-    background: #0d0f14;
-    border: 1px solid var(--border-steel);
-    border-radius: 6px;
-    overflow: hidden;
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
-  }
-
-  .spec-header {
-    background: #191d28;
-    padding: 0.5rem 0.9rem;
-    color: var(--amber-cel);
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    border-bottom: 1px solid var(--border-steel);
-  }
-
-  .spec-row {
-    display: flex;
-    justify-content: space-between;
-    padding: 0.55rem 0.9rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    gap: 1rem;
-  }
-
-  .spec-row:last-child {
-    border-bottom: none;
-  }
-
-  .spec-key {
-    color: var(--text-muted);
-    flex-shrink: 0;
-  }
-
-  .spec-val {
-    color: var(--text-primary);
-    text-align: right;
-    font-weight: 600;
-  }
-
-  /* Origin Showcase */
-  .origin-showcase {
-    background: linear-gradient(145deg, #151821 0%, #0d0f15 100%);
-    border: 1px solid rgba(212, 175, 55, 0.4);
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
-  }
-
-  .origin-top-strip {
-    display: flex;
-    justify-content: space-between;
-    padding: 0.65rem 1.5rem;
-    background: linear-gradient(90deg, #1b160c 0%, #241215 100%);
-    border-bottom: 1px solid rgba(212, 175, 55, 0.35);
-    font-family: var(--font-mono);
-    font-size: 0.73rem;
-    color: var(--transam-gold);
-    font-weight: 700;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-  }
-
-  .origin-content {
-    display: grid;
-    grid-template-columns: 1.15fr 0.85fr;
-    gap: 2.5rem;
-    padding: 2.5rem;
-    align-items: center;
-  }
-
-  .origin-heading {
-    font-family: var(--font-heading);
-    font-size: clamp(1.6rem, 3vw, 2.2rem);
-    font-weight: 700;
-    font-style: italic;
-    text-transform: uppercase;
-    margin: 0.9rem 0 1rem;
-    line-height: 1.15;
-  }
-
-  .gold-text {
-    color: var(--transam-gold);
-  }
-
-  .origin-story p {
-    color: var(--text-secondary);
-    margin-bottom: 1rem;
-    font-size: 1rem;
-  }
-
-  .origin-story strong {
-    color: var(--text-primary);
-  }
-
-  .twin-badges {
-    display: flex;
-    flex-direction: column;
-    gap: 0.65rem;
-    margin-top: 1.5rem;
-  }
-
-  .twin-pill {
-    display: flex;
-    align-items: center;
-    gap: 0.9rem;
-    background: rgba(0, 0, 0, 0.45);
-    border-left: 3px solid var(--transam-gold);
-    padding: 0.65rem 1rem;
-    border-radius: 4px;
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-  }
-
-  .pill-year {
-    background: var(--transam-gold);
-    color: #000;
-    font-weight: 700;
-    padding: 0.15rem 0.5rem;
-    border-radius: 3px;
-  }
-
-  .pill-desc {
-    color: var(--text-primary);
-    font-weight: 600;
-  }
-
-  /* Pontiac Digital Cluster Panel */
-  .transam-cluster-panel {
-    background: #07080b;
-    border: 2px solid #2b303f;
-    border-radius: 8px;
-    padding: 1.25rem;
-    box-shadow: inset 0 0 30px rgba(255, 107, 0, 0.08);
-  }
-
-  .cluster-header {
-    display: flex;
-    justify-content: space-between;
-    font-family: var(--font-mono);
-    font-size: 0.68rem;
-    color: var(--amber-dash);
-    letter-spacing: 0.1em;
-    border-bottom: 1px dashed rgba(255, 107, 0, 0.35);
-    padding-bottom: 0.6rem;
-    margin-bottom: 1.1rem;
-  }
-
-  .cluster-gauges {
+  .host-tags {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 0.85rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-subtle);
   }
 
-  .gauge-box {
-    background: rgba(255, 107, 0, 0.05);
-    border: 1px solid rgba(255, 107, 0, 0.28);
-    padding: 0.85rem;
-    border-radius: 4px;
+  .tag-item {
     display: flex;
     flex-direction: column;
-    font-family: var(--font-mono);
+    gap: 0.15rem;
   }
 
-  .gauge-label {
-    font-size: 0.65rem;
+  .tag-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
     color: var(--text-muted);
-    letter-spacing: 0.1em;
+    text-transform: uppercase;
   }
 
-  .gauge-value {
-    font-size: 1rem;
+  .tag-value {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  /* Origin Card */
+  .origin-card {
+    background: linear-gradient(135deg, #14171f 0%, #101218 100%);
+    border: 1px solid var(--border-subtle);
+    border-radius: 20px;
+    padding: 2.75rem;
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  .origin-title {
+    font-family: var(--font-heading);
+    font-size: clamp(1.5rem, 2.8vw, 2rem);
     font-weight: 700;
-    color: var(--amber-cel);
-    margin: 0.25rem 0 0.15rem;
-    text-shadow: 0 0 10px rgba(234, 179, 8, 0.35);
+    margin-bottom: 1rem;
+    line-height: 1.2;
   }
 
-  .gauge-sub {
-    font-size: 0.66rem;
+  .origin-text p {
     color: var(--text-secondary);
+    font-size: 1rem;
+    margin-bottom: 0.85rem;
   }
 
-  .cluster-footer {
-    margin-top: 1.1rem;
-    padding-top: 0.75rem;
-    border-top: 1px dashed rgba(255, 107, 0, 0.35);
+  .origin-text strong {
+    color: var(--text-primary);
+  }
+
+  .origin-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  .stat-box {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border-subtle);
+    border-radius: 14px;
+    padding: 1.1rem 1.35rem;
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    color: var(--amber-cel);
+    justify-content: space-between;
+    gap: 1rem;
   }
 
-  @media (max-width: 900px) {
+  .stat-num {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--accent-red);
+  }
+
+  .stat-label {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
+
+  @media (max-width: 860px) {
     .hosts-grid,
-    .origin-content {
+    .origin-card {
       grid-template-columns: 1fr;
     }
-    .origin-content {
-      padding: 1.5rem;
+    .host-tags {
+      grid-template-columns: 1fr;
+    }
+    .origin-card {
+      padding: 2rem;
+      gap: 2rem;
     }
   }
 </style>

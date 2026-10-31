@@ -13,28 +13,16 @@ const homeUrl = base || '/';
 ---
 
 <Layout
-  title={`All Episodes (${episodes.length}) | ${SITE_CONFIG.title}`}
+  title={`All Episodes (${episodes.length}) — ${SITE_CONFIG.title}`}
   description="Stream all episodes of the High Octane Dads Podcast with James Schoepf and Chris Mayo."
 >
   <Header />
   <main>
-    <section class="archive-hero">
+    <section class="archive-top">
       <div class="container">
-        <a href={homeUrl} class="back-link">← BACK TO HOME GARAGE</a>
-        <div class="archive-title-row">
-          <div>
-            <div class="dash-tag">COMPLETE TRANSMISSION LOG // {episodes.length} EPISODES</div>
-            <h1 class="section-title">FULL <span>EPISODE ARCHIVE</span></h1>
-          </div>
-          <a href={SITE_CONFIG.links.rss} target="_blank" rel="noopener noreferrer" class="rss-pill">
-            <span>DIRECT RSS FEED</span>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg>
-          </a>
-        </div>
+        <a href={homeUrl} class="back-link">← Back to Home</a>
       </div>
     </section>
-
-    <div class="pinstripe-divider"></div>
     <EpisodeGrid episodes={episodes} showViewAll={false} />
     <MerchSpotlight />
   </main>
@@ -42,41 +30,18 @@ const homeUrl = base || '/';
 </Layout>
 
 <style>
-  .archive-hero {
-    padding: 3rem 0 2rem;
+  .archive-top {
+    padding: 2.5rem 0 0;
   }
 
   .back-link {
     display: inline-block;
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
-    color: var(--transam-gold);
-    margin-bottom: 1.25rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-secondary);
   }
 
   .back-link:hover {
-    text-decoration: underline;
-  }
-
-  .archive-title-row {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: 1.5rem;
-    flex-wrap: wrap;
-  }
-
-  .rss-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
-    font-weight: 700;
-    padding: 0.6rem 1rem;
-    border-radius: 5px;
-    background: rgba(255, 107, 0, 0.12);
-    border: 1px solid rgba(255, 107, 0, 0.4);
-    color: var(--amber-cel);
+    color: var(--text-primary);
   }
 </style>
