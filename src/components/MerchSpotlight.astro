@@ -25,11 +25,12 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       </div>
 
       <div class="merch-visual">
+        <div class="badge-glow" aria-hidden="true"></div>
         <img
           src={`${base}/images/high-octane-dads-est-qr.png`}
-          alt="High Octane Dads Est 2023 Badge"
-          width="170"
-          height="170"
+          alt="High Octane Dads Est 2023 Send It QR Badge"
+          width="260"
+          height="260"
         />
       </div>
     </div>
@@ -64,18 +65,19 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 <style>
   .merch-section {
-    padding: 2rem 0 5.5rem;
+    padding: 1.5rem 0 4.5rem;
   }
 
   .merch-card {
     background: linear-gradient(135deg, #171215 0%, #111318 100%);
     border: 1px solid rgba(230, 36, 41, 0.28);
     border-radius: 24px;
-    padding: 3rem 3.25rem;
-    display: flex;
+    padding: 2.75rem 3.5rem;
+    display: grid;
+    grid-template-columns: 1.25fr 0.75fr;
     align-items: center;
-    justify-content: space-between;
     gap: 2.5rem;
+    overflow: hidden;
   }
 
   .merch-copy {
@@ -110,10 +112,32 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     transform: translateY(-1px);
   }
 
+  .merch-visual {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .badge-glow {
+    position: absolute;
+    width: 280px;
+    height: 280px;
+    background: radial-gradient(circle, rgba(230, 36, 41, 0.22) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
   .merch-visual img {
-    width: 155px;
-    height: 155px;
+    position: relative;
+    width: 245px;
+    height: 245px;
     flex-shrink: 0;
+    filter: drop-shadow(0 16px 32px rgba(0, 0, 0, 0.55));
+    transition: transform 0.3s ease;
+  }
+
+  .merch-card:hover .merch-visual img {
+    transform: scale(1.04) rotate(3deg);
   }
 
   /* Riverside Callout Bar */
@@ -186,7 +210,14 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   }
 
   @media (max-width: 768px) {
-    .merch-card,
+    .merch-card {
+      grid-template-columns: 1fr;
+      padding: 2rem;
+    }
+    .merch-visual img {
+      width: 200px;
+      height: 200px;
+    }
     .riverside-card {
       flex-direction: column;
       align-items: flex-start;

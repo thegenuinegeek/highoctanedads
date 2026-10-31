@@ -10,32 +10,62 @@ const { episodes, showViewAll = true } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
-<section id="episodes" class="episodes-section">
+<section id="episodes" class="episodes-section" data-ep-section>
   <div class="container">
     <div class="ep-header">
       <div>
         <span class="eyebrow">Listen</span>
         <h2 class="section-heading">Recent Episodes</h2>
       </div>
-      {showViewAll && (
-        <a href={`${base}/episodes`} class="view-all">
-          <span>View All Episodes</span>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
-      )}
+
+      <div class="ep-controls">
+        <!-- View Switcher: List (default) vs Tiles -->
+        <div class="view-toggle" role="group" aria-label="Episode layout view">
+          <button
+            type="button"
+            class="toggle-btn active"
+            data-view-btn="list"
+            aria-pressed="true"
+            title="List view"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+            <span>List</span>
+          </button>
+          <button
+            type="button"
+            class="toggle-btn"
+            data-view-btn="grid"
+            aria-pressed="false"
+            title="Grid tiles view"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            <span>Tiles</span>
+          </button>
+        </div>
+
+        {showViewAll && (
+          <a href={`${base}/episodes`} class="view-all">
+            <span>View All Episodes</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        )}
+      </div>
     </div>
 
-    <div class="ep-grid">
+    <!-- Default to List Mode -->
+    <div class="ep-container is-list" data-ep-container>
       {episodes.map((ep) => (
         <article class="ep-card">
-          <div class="ep-meta">
-            <span class="ep-badge">{ep.episodeNumber}</span>
-            <span>{ep.formattedDate}</span>
-            <span class="ep-dur">{ep.duration}</span>
-          </div>
+          <div class="ep-main">
+            <div class="ep-meta">
+              <span class="ep-badge">{ep.episodeNumber}</span>
+              <span>{ep.formattedDate}</span>
+              <span class="ep-dur">• {ep.duration}</span>
+            </div>
 
-          <h3 class="ep-title">{ep.cleanTitle}</h3>
-          <p class="ep-excerpt">{ep.plainExcerpt}</p>
+            <h3 class="ep-title">{ep.cleanTitle}</h3>
+            <p class="ep-excerpt">{ep.plainExcerpt}</p>
+          </div>
 
           <div class="ep-footer">
             {ep.audioUrl && (
@@ -51,6 +81,35 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   </div>
 </section>
 
+<script>
+  document.querySelectorAll('[data-ep-section]').forEach((section) => {
+    const container = section.querySelector('[data-ep-container]');
+    const buttons = section.querySelectorAll('[data-view-btn]');
+
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const mode = btn.getAttribute('data-view-btn');
+        if (!container || !mode) return;
+
+        buttons.forEach((b) => {
+          b.classList.remove('active');
+          b.setAttribute('aria-pressed', 'false');
+        });
+        btn.classList.add('active');
+        btn.setAttribute('aria-pressed', 'true');
+
+        if (mode === 'grid') {
+          container.classList.remove('is-list');
+          container.classList.add('is-grid');
+        } else {
+          container.classList.remove('is-grid');
+          container.classList.add('is-list');
+        }
+      });
+    });
+  });
+</script>
+
 <style>
   .episodes-section {
     padding: 5.5rem 0;
@@ -62,8 +121,50 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     align-items: flex-end;
     justify-content: space-between;
     gap: 1.5rem;
-    margin-bottom: 2.75rem;
+    margin-bottom: 2.5rem;
     flex-wrap: wrap;
+  }
+
+  .ep-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    flex-wrap: wrap;
+  }
+
+  .view-toggle {
+    display: inline-flex;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: 999px;
+    padding: 0.25rem;
+    gap: 0.25rem;
+  }
+
+  .toggle-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.45rem 0.9rem;
+    border-radius: 999px;
+    border: none;
+    background: transparent;
+    color: var(--text-secondary);
+    font-family: var(--font-body);
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .toggle-btn:hover {
+    color: var(--text-primary);
+  }
+
+  .toggle-btn.active {
+    background: var(--bg-elevated);
+    color: var(--text-primary);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
   }
 
   .view-all {
@@ -85,19 +186,52 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     background: var(--bg-elevated);
   }
 
-  .ep-grid {
+  /* LIST VIEW (Default) */
+  .ep-container.is-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .ep-container.is-list .ep-card {
+    display: grid;
+    grid-template-columns: 1.3fr 0.9fr;
+    gap: 2.25rem;
+    align-items: center;
+    padding: 1.65rem 2rem;
+  }
+
+  .ep-container.is-list .ep-excerpt {
+    margin-bottom: 0;
+  }
+
+  .ep-container.is-list .ep-footer {
+    align-items: flex-end;
+  }
+
+  /* GRID / TILES VIEW */
+  .ep-container.is-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
     gap: 1.5rem;
   }
 
+  .ep-container.is-grid .ep-card {
+    display: flex;
+    flex-direction: column;
+    padding: 1.75rem;
+  }
+
+  .ep-container.is-grid .ep-main {
+    flex: 1;
+    margin-bottom: 1.5rem;
+  }
+
+  /* Shared Card Styling */
   .ep-card {
     background: var(--bg-surface);
     border: 1px solid var(--border-subtle);
     border-radius: 18px;
-    padding: 1.75rem;
-    display: flex;
-    flex-direction: column;
     transition: border-color 0.2s ease, transform 0.2s ease;
   }
 
@@ -113,20 +247,16 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     font-size: 0.8rem;
     color: var(--text-muted);
     font-weight: 500;
-    margin-bottom: 0.85rem;
+    margin-bottom: 0.65rem;
   }
 
   .ep-badge {
-    background: rgba(255, 255, 255, 0.06);
+    background: rgba(255, 255, 255, 0.07);
     color: var(--text-primary);
     font-weight: 600;
     font-size: 0.74rem;
-    padding: 0.2rem 0.55rem;
+    padding: 0.2rem 0.6rem;
     border-radius: 6px;
-  }
-
-  .ep-dur {
-    margin-left: auto;
   }
 
   .ep-title {
@@ -134,25 +264,23 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     font-size: 1.25rem;
     font-weight: 700;
     line-height: 1.3;
-    margin-bottom: 0.65rem;
+    margin-bottom: 0.5rem;
   }
 
   .ep-excerpt {
     color: var(--text-secondary);
     font-size: 0.92rem;
-    margin-bottom: 1.5rem;
-    flex: 1;
   }
 
   .ep-footer {
-    margin-top: auto;
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 0.6rem;
+    width: 100%;
   }
 
   .ep-link {
-    font-size: 0.84rem;
+    font-size: 0.82rem;
     font-weight: 600;
     color: var(--text-secondary);
     transition: color 0.2s ease;
@@ -160,5 +288,16 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
   .ep-link:hover {
     color: var(--text-primary);
+  }
+
+  @media (max-width: 860px) {
+    .ep-container.is-list .ep-card {
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+      padding: 1.5rem;
+    }
+    .ep-container.is-list .ep-footer {
+      align-items: flex-start;
+    }
   }
 </style>
