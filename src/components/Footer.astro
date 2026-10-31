@@ -6,6 +6,56 @@ const homeUrl = base || '/';
 ---
 
 <footer class="site-footer">
+  <!-- Riverside.fm Banner Near the Bottom -->
+  <div class="container">
+    <div class="riverside-banner">
+      <div class="rs-brand">
+        <!-- Riverside.fm Waveform & Wordmark Logo -->
+        <a
+          href={SITE_CONFIG.links.riverside}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="rs-logo"
+          aria-label="Riverside.fm"
+        >
+          <svg class="rs-mark" width="38" height="38" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="40" height="40" rx="10" fill="url(#rs-grad)"/>
+            <path d="M11 23.5C12.8 23.5 13.4 16.5 15.2 16.5C17 16.5 17.6 25.5 19.4 25.5C21.2 25.5 21.8 14.5 23.6 14.5C25.4 14.5 26 23.5 27.8 23.5C28.6 23.5 29.2 21 29.8 20" stroke="white" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <defs>
+              <linearGradient id="rs-grad" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#8B5CF6"/>
+                <stop offset="1" stop-color="#6366F1"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <div class="rs-wordmark">
+            <span class="rs-name">RIVERSIDE<span>.FM</span></span>
+            <span class="rs-sub">RECORDING &amp; EDITING STUDIO</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="rs-copy">
+        <h3>Want to start your own podcast, but don’t know where to start?</h3>
+        <p>
+          Check out <strong>Riverside.fm</strong>! It’s what we use to record and edit the High Octane Dads Podcast—and we love it.
+        </p>
+      </div>
+
+      <div class="rs-action">
+        <a
+          href={SITE_CONFIG.links.riverside}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="rs-btn"
+        >
+          <span>Check out Riverside.fm</span>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
   <div class="container footer-inner">
     <div class="footer-brand">
       <a href={homeUrl} class="brand-row">
@@ -31,15 +81,104 @@ const homeUrl = base || '/';
 
   <div class="container footer-bottom">
     <span>© {new Date().getFullYear()} High Octane Dads. All rights reserved.</span>
-    <span>Recorded &amp; edited with <a href={SITE_CONFIG.links.riverside} target="_blank" rel="noopener noreferrer" class="rs-foot-link">Riverside.fm</a></span>
+    <span>
+      Site designed by <a href={SITE_CONFIG.links.genuineGeek} target="_blank" rel="noopener noreferrer" class="credit-link">Genuine Geek Media</a>
+    </span>
   </div>
 </footer>
 
 <style>
   .site-footer {
     border-top: 1px solid var(--border-subtle);
-    padding: 3.5rem 0 2.5rem;
+    padding: 4rem 0 2.5rem;
     color: var(--text-secondary);
+  }
+
+  /* Riverside Banner Near Bottom */
+  .riverside-banner {
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(17, 19, 24, 0.95) 60%);
+    border: 1px solid rgba(139, 92, 246, 0.28);
+    border-radius: 22px;
+    padding: 2rem 2.5rem;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 2.25rem;
+    margin-bottom: 3.5rem;
+  }
+
+  .rs-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.85rem;
+  }
+
+  .rs-mark {
+    flex-shrink: 0;
+    box-shadow: 0 8px 20px rgba(139, 92, 246, 0.35);
+    border-radius: 10px;
+  }
+
+  .rs-wordmark {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .rs-name {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.2rem;
+    letter-spacing: 0.04em;
+    color: var(--text-primary);
+    line-height: 1.1;
+  }
+
+  .rs-name span {
+    color: #a78bfa;
+  }
+
+  .rs-sub {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    margin-top: 0.15rem;
+  }
+
+  .rs-copy h3 {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.3rem;
+  }
+
+  .rs-copy p {
+    font-size: 0.94rem;
+    color: var(--text-secondary);
+  }
+
+  .rs-copy strong {
+    color: var(--text-primary);
+  }
+
+  .rs-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.35rem;
+    border-radius: 999px;
+    background: #7c3aed;
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 600;
+    white-space: nowrap;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+
+  .rs-btn:hover {
+    background: #8b5cf6;
+    transform: translateY(-1px);
   }
 
   .footer-inner {
@@ -101,13 +240,22 @@ const homeUrl = base || '/';
     gap: 1rem;
   }
 
-  .rs-foot-link {
+  .credit-link {
     color: var(--text-secondary);
     text-decoration: underline;
     text-underline-offset: 3px;
+    font-weight: 500;
   }
 
-  .rs-foot-link:hover {
+  .credit-link:hover {
     color: var(--text-primary);
+  }
+
+  @media (max-width: 900px) {
+    .riverside-banner {
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+      padding: 1.75rem;
+    }
   }
 </style>

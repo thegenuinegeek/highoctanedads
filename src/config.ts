@@ -5,7 +5,7 @@ export const SITE_CONFIG = {
   description:
     'Join James Schoepf and Chris Mayo every Saturday for real-talk car discussions, LS swap shenanigans, third-gen F-body love, road trip stories, and dad-approved automotive tips.',
   established: '2023',
-  schedule: 'New Episodes Every Saturday',
+  schedule: 'New Episodes Coming Soon',
   email: 'hod.official.chris@gmail.com',
   links: {
     rss: 'https://anchor.fm/s/f221d764/podcast/rss',
@@ -14,6 +14,7 @@ export const SITE_CONFIG = {
     youtube: 'https://www.youtube.com/@HighOctaneDads',
     merch: 'https://shop.highoctanedads.com/',
     riverside: 'https://riverside.fm/',
+    genuineGeek: 'https://genuinegeekmedia.com/',
   },
   hosts: [
     {
