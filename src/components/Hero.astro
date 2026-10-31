@@ -1,0 +1,510 @@
+---
+import { SITE_CONFIG } from '../config';
+import type { Episode } from '../utils/rss';
+
+interface Props {
+  latestEpisode: Episode;
+}
+
+const { latestEpisode } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const epImage = latestEpisode.image.startsWith('/')
+  ? `${base}${latestEpisode.image}`
+  : latestEpisode.image;
+---
+
+<section class="hero-section">
+  <div class="container">
+    <div class="hero-grid">
+      <!-- Left Column: High Octane Intro & Platform Links -->
+      <div class="hero-copy">
+        <div class="dash-tag">
+          <span class="live-dot"></span>
+          <span>AIRS EVERY SATURDAY // MULLET MILITIA CERTIFIED</span>
+        </div>
+
+        <h1 class="hero-headline">
+          FAST CARS. LOUD PIPES. <span class="highlight-red">HIGH OCTANE</span> FATHERHOOD.
+        </h1>
+
+        <p class="hero-lead">
+          We’re <strong>James &amp; Chris</strong>—two dads who met through <strong>Mullet Militia</strong> over a shared obsession with third-gen F-bodies. We both bought <strong>1986 Pontiac Trans Ams</strong> as our very first cars, and we both still have them today—now <strong>LS-powered</strong>.
+        </p>
+
+        <!-- Platform Badges -->
+        <div class="platform-cluster">
+          <span class="cluster-label">TUNE IN ON YOUR FAVORITE FREQUENCY:</span>
+          <div class="platform-buttons">
+            <a href={SITE_CONFIG.links.youtube} target="_blank" rel="noopener noreferrer" class="plat-btn youtube">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+              <span>YouTube</span>
+            </a>
+
+            <a href={SITE_CONFIG.links.spotify} target="_blank" rel="noopener noreferrer" class="plat-btn spotify">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+              <span>Spotify</span>
+            </a>
+
+            <a href={SITE_CONFIG.links.apple} target="_blank" rel="noopener noreferrer" class="plat-btn apple">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M5.34 0A5.328 5.328 0 0 0 0 5.34v13.32A5.328 5.328 0 0 0 5.34 24h13.32A5.328 5.328 0 0 0 24 18.66V5.34A5.328 5.328 0 0 0 18.66 0zm6.525 2.568c2.336 0 4.448.902 6.056 2.587 1.224 1.272 1.912 2.619 2.264 4.392.12.59.12 2.2 0 2.864-.312 1.696-1.088 3.168-2.312 4.392-1.168 1.168-2.752 1.968-4.4 2.224-.496.08-.76.008-.92-.248-.12-.192-.112-.528.016-.728.112-.176.296-.24.792-.328 1.992-.352 3.696-1.488 4.744-3.168.736-1.184 1.08-2.464 1.08-3.984 0-1.696-.44-3.08-1.368-4.32-1.304-1.736-3.288-2.744-5.584-2.84-2.472-.104-4.744.912-6.2 2.776-1.024 1.312-1.528 2.792-1.528 4.496 0 1.488.352 2.792 1.064 3.936 1.04 1.672 2.736 2.816 4.728 3.184.496.088.68.152.792.328.128.2.136.536.016.728-.16.256-.424.328-.92.248-1.648-.256-3.232-1.056-4.4-2.224-1.224-1.224-2-2.696-2.312-4.392-.12-.664-.12-2.274 0-2.864.352-1.773 1.04-3.12 2.264-4.392 1.608-1.685 3.72-2.587 6.056-2.587zm.135 3.624c1.904 0 3.64 1.048 4.504 2.72.344.664.528 1.368.552 2.16.048 1.544-.568 2.976-1.744 4.024-.344.304-.688.456-.96.416-.368-.056-.584-.456-.44-.808.072-.176.2-.296.496-.528.888-.704 1.368-1.688 1.368-2.816 0-1.992-1.568-3.664-3.544-3.776-2.16-.12-3.968 1.568-3.968 3.712 0 1.184.48 2.168 1.392 2.872.296.232.424.352.496.528.144.352-.072.752-.44.808-.272.04-.616-.112-.96-.416-1.176-1.048-1.792-2.48-1.744-4.024.024-.792.208-1.496.552-2.16.864-1.672 2.6-2.72 4.504-2.72zm-.048 3.312c.992 0 1.8.808 1.8 1.8a1.802 1.802 0 0 1-1.056 1.64l.512 4.352c.064.544-.04 1.008-.312 1.352-.288.368-.72.568-1.224.568h-.448c-.504 0-.936-.2-1.224-.568-.272-.344-.376-.808-.312-1.352l.512-4.352a1.802 1.802 0 0 1-1.056-1.64c0-.992.808-1.8 1.808-1.8z"/></svg>
+              <span>Apple Podcasts</span>
+            </a>
+
+            <a href={SITE_CONFIG.links.rss} target="_blank" rel="noopener noreferrer" class="plat-btn rss" title="Direct Podcast RSS Feed">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg>
+              <span>RSS</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Visual Showcase with Banner + Est QR Badge -->
+      <div class="hero-visual">
+        <div class="banner-frame">
+          <div class="frame-header">
+            <span class="frame-dots"><i></i><i></i><i></i></span>
+            <span class="frame-title">CH_01 // SATURDAY_BROADCAST.MOV</span>
+            <span class="frame-rec">● REC</span>
+          </div>
+          <div class="banner-img-wrap">
+            <img
+              src={`${base}/images/high-octane-dads-podcast-banner.jpg`}
+              alt="Chris and James - High Octane Dads Podcast Every Saturday"
+              class="banner-img"
+            />
+            <div class="banner-vignette"></div>
+          </div>
+          <div class="banner-caption">
+            <span>CHRIS MAYO (LEFT) &amp; JAMES SCHOEPF (RIGHT)</span>
+            <span class="gold-tag">1986 F-BODY CREW</span>
+          </div>
+        </div>
+
+        <!-- Floating QR Seal Badge -->
+        <div class="qr-seal-card">
+          <img
+            src={`${base}/images/high-octane-dads-est-qr.png`}
+            alt="High Octane Dads Est 2023 Send It QR Code Badge"
+            width="115"
+            height="115"
+          />
+          <div class="qr-meta">
+            <span class="qr-title">SCAN TO SEND IT</span>
+            <span class="qr-sub">Share the show in the shop or at the track</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Latest Episode Digital Dash Player -->
+    <div id="latest-episode" class="latest-player-deck">
+      <div class="deck-top-bar">
+        <div class="deck-status">
+          <span class="pulse-indicator"></span>
+          <span>LATEST TRANSMISSION // {latestEpisode.episodeNumber}</span>
+        </div>
+        <div class="deck-telemetry">
+          <span>DATE: <strong>{latestEpisode.formattedDate}</strong></span>
+          <span>RUNTIME: <strong>{latestEpisode.duration}</strong></span>
+        </div>
+      </div>
+
+      <div class="deck-body">
+        <div class="deck-art">
+          <img src={epImage} alt={latestEpisode.title} width="120" height="120" />
+        </div>
+        <div class="deck-info">
+          <h2 class="deck-title">{latestEpisode.cleanTitle}</h2>
+          <p class="deck-desc">{latestEpisode.plainExcerpt}</p>
+          {latestEpisode.audioUrl && (
+            <div class="audio-wrapper">
+              <audio controls preload="none" src={latestEpisode.audioUrl}>
+                Your browser does not support the audio element.
+              </audio>
+            </div>
+          )}
+        </div>
+        <div class="deck-cta">
+          <a href={latestEpisode.link} target="_blank" rel="noopener noreferrer" class="listen-ext-btn">
+            <span>OPEN ON SPOTIFY</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+          </a>
+          <a href={`${base}/episodes`} class="all-ep-link">Browse All 40+ Episodes →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero-section {
+    padding: 4rem 0 3.5rem;
+    position: relative;
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  .live-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--red-octane);
+    box-shadow: 0 0 10px var(--red-octane);
+    display: inline-block;
+  }
+
+  .hero-headline {
+    font-family: var(--font-display);
+    font-size: clamp(2.35rem, 5vw, 4rem);
+    line-height: 1.05;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    margin: 1.1rem 0 1.25rem;
+  }
+
+  .highlight-red {
+    color: var(--red-octane);
+    text-shadow: 0 0 28px rgba(240, 30, 35, 0.45);
+  }
+
+  .hero-lead {
+    font-size: 1.12rem;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin-bottom: 2rem;
+  }
+
+  .hero-lead strong {
+    color: var(--text-primary);
+  }
+
+  .platform-cluster {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .cluster-label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    color: var(--transam-gold);
+  }
+
+  .platform-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .plat-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.7rem 1.2rem;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 0.92rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-radius: 6px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-steel);
+    transition: all 0.2s ease;
+  }
+
+  .plat-btn:hover {
+    transform: translateY(-2px);
+    border-color: var(--text-primary);
+  }
+
+  .plat-btn.youtube:hover {
+    background: #ff0000;
+    border-color: #ff0000;
+    box-shadow: 0 6px 20px rgba(255, 0, 0, 0.4);
+  }
+
+  .plat-btn.spotify:hover {
+    background: #1db954;
+    border-color: #1db954;
+    color: #000;
+    box-shadow: 0 6px 20px rgba(29, 185, 84, 0.4);
+  }
+
+  .plat-btn.apple:hover {
+    background: #a855f7;
+    border-color: #a855f7;
+    box-shadow: 0 6px 20px rgba(168, 85, 247, 0.4);
+  }
+
+  .plat-btn.rss:hover {
+    background: var(--amber-dash);
+    border-color: var(--amber-dash);
+    color: #000;
+  }
+
+  /* Right Visual Column */
+  .hero-visual {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .banner-frame {
+    background: var(--bg-cluster);
+    border: 1px solid var(--border-steel);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.65);
+  }
+
+  .frame-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.55rem 0.9rem;
+    background: #08090c;
+    border-bottom: 1px solid var(--border-steel);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+  }
+
+  .frame-dots {
+    display: flex;
+    gap: 5px;
+  }
+
+  .frame-dots i {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--border-steel);
+    display: inline-block;
+  }
+
+  .frame-title {
+    color: var(--text-muted);
+  }
+
+  .frame-rec {
+    color: var(--red-octane);
+    font-weight: 700;
+  }
+
+  .banner-img-wrap {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .banner-img {
+    width: 100%;
+    display: block;
+    filter: contrast(1.06) saturate(1.05);
+  }
+
+  /* Subtle CRT scanline & vignette treatment so the banner looks super sharp and intentional */
+  .banner-vignette {
+    position: absolute;
+    inset: 0;
+    background:
+      repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.18) 0px,
+        rgba(0, 0, 0, 0.18) 1px,
+        transparent 1px,
+        transparent 3px
+      ),
+      radial-gradient(circle, transparent 55%, rgba(10, 11, 14, 0.65) 100%);
+    pointer-events: none;
+  }
+
+  .banner-caption {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.65rem 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+    background: #0c0e13;
+  }
+
+  .gold-tag {
+    color: var(--transam-gold);
+    font-weight: 700;
+  }
+
+  .qr-seal-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: rgba(22, 25, 34, 0.9);
+    border: 1px solid rgba(212, 175, 55, 0.35);
+    border-radius: 10px;
+    padding: 0.85rem 1.15rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.45);
+  }
+
+  .qr-seal-card img {
+    width: 78px;
+    height: 78px;
+    flex-shrink: 0;
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.5));
+  }
+
+  .qr-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .qr-title {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--cream-badge);
+    letter-spacing: 0.05em;
+  }
+
+  .qr-sub {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+  }
+
+  /* Latest Episode Player Deck */
+  .latest-player-deck {
+    margin-top: 3.5rem;
+    background: linear-gradient(135deg, #131620 0%, #0d0f15 100%);
+    border: 1px solid var(--border-steel);
+    border-left: 4px solid var(--red-octane);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5);
+  }
+
+  .deck-top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.7rem 1.5rem;
+    background: rgba(0, 0, 0, 0.45);
+    border-bottom: 1px solid var(--border-steel);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .deck-status {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    color: var(--amber-cel);
+    font-weight: 700;
+  }
+
+  .pulse-indicator {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #22c55e;
+    box-shadow: 0 0 10px #22c55e;
+  }
+
+  .deck-telemetry {
+    display: flex;
+    gap: 1.5rem;
+    color: var(--text-secondary);
+  }
+
+  .deck-telemetry strong {
+    color: var(--text-primary);
+  }
+
+  .deck-body {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 1.75rem;
+    padding: 1.5rem;
+    align-items: center;
+  }
+
+  .deck-art img {
+    width: 110px;
+    height: 110px;
+    border-radius: 8px;
+    object-fit: cover;
+    border: 2px solid var(--border-steel);
+    background: #fff;
+  }
+
+  .deck-title {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+  }
+
+  .deck-desc {
+    color: var(--text-secondary);
+    font-size: 0.94rem;
+    margin-bottom: 0.9rem;
+    max-width: 720px;
+  }
+
+  .deck-cta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.75rem;
+  }
+
+  .listen-ext-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    background: var(--red-octane);
+    color: #fff;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 0.88rem;
+    letter-spacing: 0.06em;
+    border-radius: 5px;
+    white-space: nowrap;
+    transition: background 0.2s ease;
+  }
+
+  .listen-ext-btn:hover {
+    background: #ff3136;
+  }
+
+  .all-ep-link {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--transam-gold);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  @media (max-width: 960px) {
+    .hero-grid {
+      grid-template-columns: 1fr;
+    }
+    .deck-body {
+      grid-template-columns: 1fr;
+    }
+    .deck-art {
+      display: none;
+    }
+    .deck-cta {
+      align-items: flex-start;
+    }
+  }
+</style>

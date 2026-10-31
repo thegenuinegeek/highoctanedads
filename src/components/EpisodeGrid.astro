@@ -1,0 +1,226 @@
+---
+import type { Episode } from '../utils/rss';
+
+interface Props {
+  episodes: Episode[];
+  showViewAll?: boolean;
+}
+
+const { episodes, showViewAll = true } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<section id="episodes" class="episodes-section">
+  <div class="container">
+    <div class="ep-header-row">
+      <div>
+        <div class="dash-tag">AUTO-SYNCED RSS ARCHIVE // AUDIO LOGS</div>
+        <h2 class="section-title">RECENT <span>TRANSMISSIONS</span></h2>
+      </div>
+      {showViewAll && (
+        <a href={`${base}/episodes`} class="view-all-btn">
+          <span>VIEW FULL 40+ EPISODE ARCHIVE</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      )}
+    </div>
+
+    <div class="ep-grid">
+      {episodes.map((ep) => (
+        <article class="ep-card">
+          <div class="ep-card-meta">
+            <span class="ep-num">{ep.episodeNumber}</span>
+            <span class="ep-date">{ep.formattedDate}</span>
+            <span class="ep-dur">⏱ {ep.duration}</span>
+          </div>
+
+          <h3 class="ep-title">{ep.cleanTitle}</h3>
+          <p class="ep-excerpt">{ep.plainExcerpt}</p>
+
+          {ep.chapters.length > 0 && (
+            <div class="ep-chapters">
+              <span class="chap-heading">HIGHLIGHTS:</span>
+              <ul>
+                {ep.chapters.slice(0, 3).map((ch) => (
+                  <li>
+                    <span class="chap-time">{ch.time}</span>
+                    <span class="chap-label">{ch.label}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          <div class="ep-card-footer">
+            {ep.audioUrl && (
+              <audio controls preload="none" src={ep.audioUrl}></audio>
+            )}
+            <div class="ep-links">
+              <a href={ep.link} target="_blank" rel="noopener noreferrer" class="ep-ext-link">
+                Listen on Spotify / Podcasters →
+              </a>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .episodes-section {
+    padding: 4.5rem 0;
+  }
+
+  .ep-header-row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1.5rem;
+    margin-bottom: 2.75rem;
+    flex-wrap: wrap;
+  }
+
+  .view-all-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--transam-gold);
+    border: 1px solid rgba(212, 175, 55, 0.45);
+    padding: 0.65rem 1.15rem;
+    border-radius: 6px;
+    background: rgba(212, 175, 55, 0.08);
+    transition: all 0.2s ease;
+  }
+
+  .view-all-btn:hover {
+    background: var(--transam-gold);
+    color: #000;
+  }
+
+  .ep-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1.75rem;
+  }
+
+  .ep-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-steel);
+    border-radius: 10px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+  }
+
+  .ep-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(240, 30, 35, 0.55);
+  }
+
+  .ep-card-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    margin-bottom: 0.85rem;
+  }
+
+  .ep-num {
+    background: var(--red-octane);
+    color: #fff;
+    font-weight: 700;
+    padding: 0.15rem 0.55rem;
+    border-radius: 3px;
+  }
+
+  .ep-date {
+    color: var(--text-muted);
+  }
+
+  .ep-dur {
+    margin-left: auto;
+    color: var(--amber-cel);
+  }
+
+  .ep-title {
+    font-family: var(--font-heading);
+    font-size: 1.28rem;
+    font-weight: 700;
+    line-height: 1.25;
+    margin-bottom: 0.65rem;
+  }
+
+  .ep-excerpt {
+    color: var(--text-secondary);
+    font-size: 0.92rem;
+    margin-bottom: 1.15rem;
+    flex: 1;
+  }
+
+  .ep-chapters {
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid var(--border-steel);
+    border-radius: 6px;
+    padding: 0.75rem;
+    margin-bottom: 1.15rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+  }
+
+  .chap-heading {
+    display: block;
+    color: var(--transam-gold);
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+  }
+
+  .ep-chapters ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .ep-chapters li {
+    display: flex;
+    gap: 0.5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .chap-time {
+    color: var(--amber-dash);
+    flex-shrink: 0;
+  }
+
+  .chap-label {
+    color: var(--text-secondary);
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .ep-card-footer {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  .ep-ext-link {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--transam-gold);
+    font-weight: 600;
+  }
+
+  .ep-ext-link:hover {
+    text-decoration: underline;
+  }
+</style>

@@ -1,0 +1,161 @@
+---
+import { SITE_CONFIG } from '../config';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const homeUrl = base || '/';
+---
+
+<footer class="site-footer">
+  <div class="pinstripe-divider"></div>
+
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <div class="footer-logos">
+        <div class="footer-logo-pill">
+          <img src={`${base}/images/HOD-Logo-2024.png`} alt="High Octane Dads Logo" width="54" height="54" />
+        </div>
+        <img
+          src={`${base}/images/high-octane-dads-podcast-check-engine-logo.png`}
+          alt="Check Engine Logo"
+          width="54"
+          height="54"
+          class="footer-cel"
+        />
+        <img
+          src={`${base}/images/high-octane-dads-est-qr.png`}
+          alt="Est 2023 Send It QR Badge"
+          width="54"
+          height="54"
+        />
+      </div>
+      <h3 class="footer-title">HIGH OCTANE DADS PODCAST</h3>
+      <p class="footer-desc">
+        Hosted by James Schoepf &amp; Chris Mayo. Fueling fatherhood with horsepower, twin LS-swapped 1986 Trans Ams, Mullet Militia roots, and Saturday garage talk.
+      </p>
+    </div>
+
+    <div class="footer-col">
+      <h4>NAVIGATION</h4>
+      <ul>
+        <li><a href={homeUrl}>Home Base</a></li>
+        <li><a href={`${base}/#meet-the-dads`}>Meet James &amp; Chris</a></li>
+        <li><a href={`${base}/#trans-am-twins`}>Twin ’86 Trans Ams</a></li>
+        <li><a href={`${base}/episodes`}>Full Episode Archive</a></li>
+        <li><a href={`${base}/#pit-radio`}>Pit Radio Contact</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>LISTEN &amp; GEAR</h4>
+      <ul>
+        <li><a href={SITE_CONFIG.links.merch} target="_blank" rel="noopener noreferrer">Official Merch Store ↗</a></li>
+        <li><a href={SITE_CONFIG.links.youtube} target="_blank" rel="noopener noreferrer">YouTube Channel ↗</a></li>
+        <li><a href={SITE_CONFIG.links.spotify} target="_blank" rel="noopener noreferrer">Spotify Podcasts ↗</a></li>
+        <li><a href={SITE_CONFIG.links.apple} target="_blank" rel="noopener noreferrer">Apple Podcasts ↗</a></li>
+        <li><a href={SITE_CONFIG.links.rss} target="_blank" rel="noopener noreferrer">Podcast RSS Feed ↗</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="container footer-bottom">
+    <span>© {new Date().getFullYear()} High Octane Dads (Chris Mayo &amp; James Schoepf). All Rights Reserved.</span>
+    <span class="footer-code">THIRD-GEN F-BODY // LSX POWERED // EST. 2023</span>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: #06070a;
+    color: var(--text-secondary);
+    margin-top: 3rem;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 2.5rem;
+    padding: 4rem 1.5rem 3rem;
+  }
+
+  .footer-logos {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    margin-bottom: 1rem;
+  }
+
+  .footer-logo-pill {
+    width: 52px;
+    height: 52px;
+    background: #fff;
+    border-radius: 8px;
+    padding: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .footer-cel {
+    filter: drop-shadow(0 0 8px rgba(234, 179, 8, 0.45));
+  }
+
+  .footer-title {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 700;
+    font-style: italic;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .footer-desc {
+    font-size: 0.9rem;
+    max-width: 420px;
+  }
+
+  .footer-col h4 {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--transam-gold);
+    letter-spacing: 0.12em;
+    margin-bottom: 1rem;
+  }
+
+  .footer-col ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+  }
+
+  .footer-col a {
+    font-size: 0.92rem;
+    transition: color 0.2s ease;
+  }
+
+  .footer-col a:hover {
+    color: var(--red-octane);
+  }
+
+  .footer-bottom {
+    border-top: 1px solid var(--border-steel);
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+
+  .footer-code {
+    color: var(--amber-cel);
+  }
+
+  @media (max-width: 780px) {
+    .footer-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

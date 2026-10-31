@@ -1,0 +1,183 @@
+---
+import { SITE_CONFIG } from '../config';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = `${SITE_CONFIG.title} | ${SITE_CONFIG.tagline}`,
+  description = SITE_CONFIG.description,
+} = Astro.props;
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/png" href={`${base}/images/high-octane-dads-podcast-check-engine-logo.png`} />
+
+    <!-- Open Graph / Social -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={`${base}/images/high-octane-dads-podcast-banner.jpg`} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Google Fonts: Chakra Petch (80s Angular Racing), Russo One (Heavy Impact), JetBrains Mono (86 Digital Cluster), Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,500;0,600;0,700;1,600;1,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&family=Russo+One&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="scanline-overlay" aria-hidden="true"></div>
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    --bg-asphalt: #0a0b0e;
+    --bg-cluster: #111319;
+    --bg-card: #161922;
+    --bg-card-hover: #1d212d;
+    --red-octane: #f01e23;
+    --red-glow: rgba(240, 30, 35, 0.45);
+    --amber-cel: #eab308;
+    --amber-dash: #ff6b00;
+    --amber-glow: rgba(255, 107, 0, 0.35);
+    --transam-gold: #d4af37;
+    --cream-badge: #f5eedc;
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+    --border-steel: #262b38;
+    --font-display: 'Russo One', sans-serif;
+    --font-heading: 'Chakra Petch', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+    --font-body: 'Inter', system-ui, sans-serif;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--bg-asphalt);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    line-height: 1.6;
+  }
+
+  body {
+    overflow-x: hidden;
+    background-color: var(--bg-asphalt);
+    background-image:
+      radial-gradient(circle at 15% 10%, rgba(240, 30, 35, 0.08), transparent 38%),
+      radial-gradient(circle at 85% 25%, rgba(255, 107, 0, 0.07), transparent 35%),
+      linear-gradient(180deg, #0a0b0e 0%, #0e1117 100%);
+    min-height: 100vh;
+  }
+
+  /* Subtle 80s louver & grid texture */
+  .scanline-overlay {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 99;
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.012) 0px,
+      rgba(255, 255, 255, 0.012) 1px,
+      transparent 1px,
+      transparent 4px
+    );
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 1220px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  /* Trans Am 80s Pinstripe Divider */
+  .pinstripe-divider {
+    height: 6px;
+    width: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      var(--transam-gold) 15%,
+      var(--red-octane) 50%,
+      var(--amber-dash) 85%,
+      transparent 100%
+    );
+    position: relative;
+    opacity: 0.85;
+  }
+
+  /* Digital Cluster Tag */
+  .dash-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.35rem 0.85rem;
+    background: rgba(255, 107, 0, 0.12);
+    border: 1px solid rgba(255, 107, 0, 0.45);
+    color: var(--amber-cel);
+    border-radius: 3px;
+    box-shadow: 0 0 15px rgba(255, 107, 0, 0.12);
+  }
+
+  .section-title {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-style: italic;
+    font-size: clamp(2rem, 4vw, 3rem);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    line-height: 1.1;
+    margin-top: 0.75rem;
+  }
+
+  .section-title span {
+    color: var(--red-octane);
+  }
+
+  /* Custom Audio Player Styling */
+  audio {
+    width: 100%;
+    height: 42px;
+    border-radius: 4px;
+    filter: invert(0.92) hue-rotate(175deg) contrast(1.05);
+  }
+</style>

@@ -1,0 +1,30 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import MeetTheDads from '../components/MeetTheDads.astro';
+import MerchSpotlight from '../components/MerchSpotlight.astro';
+import EpisodeGrid from '../components/EpisodeGrid.astro';
+import PitRadioContact from '../components/PitRadioContact.astro';
+import Footer from '../components/Footer.astro';
+import { getPodcastEpisodes } from '../utils/rss';
+
+const allEpisodes = await getPodcastEpisodes();
+const latestEpisode = allEpisodes[0];
+const recentEpisodes = allEpisodes.slice(0, 6);
+---
+
+<Layout>
+  <Header />
+  <main>
+    <Hero latestEpisode={latestEpisode} />
+    <div class="pinstripe-divider"></div>
+    <MeetTheDads />
+    <MerchSpotlight />
+    <div class="pinstripe-divider"></div>
+    <EpisodeGrid episodes={recentEpisodes} showViewAll={true} />
+    <div class="pinstripe-divider"></div>
+    <PitRadioContact />
+  </main>
+  <Footer />
+</Layout>
