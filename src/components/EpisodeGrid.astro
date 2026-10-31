@@ -152,15 +152,27 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       });
     });
 
-    // Accordion expand/collapse on click in List view
+    // Accordion expand/collapse on click in List view (auto-collapse others)
     items.forEach((item) => {
       const trigger = item.querySelector('[data-ep-trigger]');
       if (!trigger) return;
 
       trigger.addEventListener('click', () => {
         if (!container?.classList.contains('is-list')) return;
-        const isOpen = item.classList.toggle('is-open');
-        trigger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        const wasOpen = item.classList.contains('is-open');
+
+        // Close all items first (and pause any playing audio inside collapsed rows)
+        items.forEach((otherItem) => {
+          otherItem.classList.remove('is-open');
+          const otherTrigger = otherItem.querySelector('[data-ep-trigger]');
+          if (otherTrigger) otherTrigger.setAttribute('aria-expanded', 'false');
+        });
+
+        // If the clicked item wasn't already open, open it
+        if (!wasOpen) {
+          item.classList.add('is-open');
+          trigger.setAttribute('aria-expanded', 'true');
+        }
       });
     });
   });
