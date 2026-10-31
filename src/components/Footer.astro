@@ -24,12 +24,14 @@ const homeUrl = base || '/';
       <a href={SITE_CONFIG.links.spotify} target="_blank" rel="noopener noreferrer">Spotify</a>
       <a href={SITE_CONFIG.links.apple} target="_blank" rel="noopener noreferrer">Apple Podcasts</a>
       <a href={SITE_CONFIG.links.merch} target="_blank" rel="noopener noreferrer">Merch Shop</a>
+      <a href={SITE_CONFIG.links.riverside} target="_blank" rel="noopener noreferrer">Riverside.fm</a>
       <a href={SITE_CONFIG.links.rss} target="_blank" rel="noopener noreferrer">RSS</a>
     </div>
   </div>
 
   <div class="container footer-bottom">
     <span>© {new Date().getFullYear()} High Octane Dads. All rights reserved.</span>
+    <span>Recorded &amp; edited with <a href={SITE_CONFIG.links.riverside} target="_blank" rel="noopener noreferrer" class="rs-foot-link">Riverside.fm</a></span>
   </div>
 </footer>
 
@@ -93,5 +95,19 @@ const homeUrl = base || '/';
     border-top: 1px solid var(--border-subtle);
     font-size: 0.82rem;
     color: var(--text-muted);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .rs-foot-link {
+    color: var(--text-secondary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .rs-foot-link:hover {
+    color: var(--text-primary);
   }
 </style>

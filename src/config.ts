@@ -9,10 +9,11 @@ export const SITE_CONFIG = {
   email: 'hod.official.chris@gmail.com',
   links: {
     rss: 'https://anchor.fm/s/f221d764/podcast/rss',
-    spotify: 'https://open.spotify.com/show/2F2t378vX55XoZ6F3n7iX6',
+    spotify: 'https://open.spotify.com/show/2DKKr5e2onqiI2BQxzxvF4',
     apple: 'https://podcasts.apple.com/us/podcast/high-octane-dads/id1744747013',
     youtube: 'https://www.youtube.com/@HighOctaneDads',
     merch: 'https://shop.highoctanedads.com/',
+    riverside: 'https://riverside.fm/',
   },
   hosts: [
     {

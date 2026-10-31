@@ -33,6 +33,32 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
         />
       </div>
     </div>
+
+    <!-- Riverside.fm Studio Callout -->
+    <div class="riverside-card">
+      <div class="rs-icon" aria-hidden="true">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+          <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+          <line x1="12" x2="12" y1="19" y2="22"/>
+        </svg>
+      </div>
+      <div class="rs-text">
+        <span class="rs-label">HOW WE RECORD &amp; EDIT</span>
+        <p>
+          We proudly use <strong>Riverside.fm</strong> to record and edit the High Octane Dads Podcast—and we love it. Studio-quality remote audio and video made easy.
+        </p>
+      </div>
+      <a
+        href={SITE_CONFIG.links.riverside}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="rs-link"
+      >
+        <span>Check out Riverside.fm</span>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+      </a>
+    </div>
   </div>
 </section>
 
@@ -90,8 +116,78 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     flex-shrink: 0;
   }
 
+  /* Riverside Callout Bar */
+  .riverside-card {
+    margin-top: 1.5rem;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: 20px;
+    padding: 1.65rem 2.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.75rem;
+  }
+
+  .rs-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-subtle);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-amber);
+    flex-shrink: 0;
+  }
+
+  .rs-text {
+    flex: 1;
+  }
+
+  .rs-label {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--accent-amber);
+    margin-bottom: 0.2rem;
+  }
+
+  .rs-text p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+  }
+
+  .rs-text strong {
+    color: var(--text-primary);
+  }
+
+  .rs-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.65rem 1.2rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--border-subtle);
+    color: var(--text-primary);
+    font-size: 0.88rem;
+    font-weight: 600;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+  }
+
+  .rs-link:hover {
+    border-color: var(--border-hover);
+    background: var(--bg-elevated);
+    transform: translateY(-1px);
+  }
+
   @media (max-width: 768px) {
-    .merch-card {
+    .merch-card,
+    .riverside-card {
       flex-direction: column;
       align-items: flex-start;
       padding: 2rem;
